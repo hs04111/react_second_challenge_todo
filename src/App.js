@@ -1,28 +1,42 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
+const rotateAnimation = keyframes`
+from {
+  transform: rotate(0deg)
+}
+to {
+  transform: rotate(360deg);
+}
+`
 
-const Container = styled.div`
+const Text = styled.span`
+font-size: 40px;
+`
+
+const Box = styled.div.attrs({required:true})`
+background-color: tomato;
+width: 500px;
+height: 500px;
 display: flex;
+justify-content: center;
+align-items: center;
+animation: ${rotateAnimation} 5s linear infinite;
+${Text} {  
+  &:hover {
+    font-size: 100px;
+  }
+  &:active {
+    opacity: 0;
+  }
+}
 `
-
-const Box = styled.div`
-background-color: ${(props)=>props.bgColor};
-width: 100px;
-height: 100px;
-`
-
-const Circle = styled(Box)`
-border-radius: 50%;
-`
-
 
 
 function App() {
   return (
-    <Container>
-      <Box bgColor="teal"/>
-      <Circle bgColor="tomato"/>
-    </Container>
+    <Box as="p">
+      <Text>Click Me</Text>
+    </Box>
   )
 }
 
