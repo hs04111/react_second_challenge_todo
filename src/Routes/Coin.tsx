@@ -8,6 +8,7 @@ import {
   useRouteMatch,
 } from 'react-router';
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 import styled from 'styled-components';
 import { fetchCoin, fetchTickers } from '../api';
 import Chart from './Chart';
@@ -21,9 +22,13 @@ const Container = styled.div`
 
 const Header = styled.header`
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   padding: 30px;
+  div {
+    margin-top: 20px;
+  }
 `;
 
 const Title = styled.h1`
@@ -218,13 +223,14 @@ function Coin() {
   const priceMatch = useRouteMatch('/:coinId/price');
   const chartMatch = useRouteMatch('/:coinId/chart');
 
-  const { isLoading: infoLoading, data: infoData } = useQuery(
+  const { isLoading: infoLoading, data: infoData } = useQuery<InfoData>(
     ['info', coinId],
     () => fetchCoin(coinId),
   );
-  const { isLoading: tickerLoading, data: tickerData } = useQuery(
+  const { isLoading: tickerLoading, data: tickerData } = useQuery<PriceData>(
     ['ticker', coinId],
     () => fetchTickers(coinId),
+    { refetchInterval: 5000 },
   );
 
   // const [loading, setLoading] = useState(true);
@@ -248,10 +254,18 @@ function Coin() {
 
   return (
     <Container>
+      <Helmet>
+        <title>
+          {state ? state.name : loading ? 'Loading...' : infoData?.name}
+        </title>
+      </Helmet>
       <Header>
         <Title>
           {state ? state.name : loading ? 'Loading...' : infoData?.name}
         </Title>
+        <Link to="/">
+          <div> &rarr; Home</div>
+        </Link>
       </Header>
       {loading ? (
         <Loader>Loading...</Loader>
@@ -267,8 +281,8 @@ function Coin() {
               <span>{infoData?.symbol}</span>
             </OverviewItem>
             <OverviewItem>
-              <span>OPEN SOURCE:</span>
-              <span>{infoData?.open_source ? 'YES' : 'NO'}</span>
+              <span>PRICE:</span>
+              <span>{tickerData?.quotes.USD.price.toFixed(3)}</span>
             </OverviewItem>
           </Overview>
           <Description>{infoData?.description}</Description>
@@ -295,7 +309,7 @@ function Coin() {
               <Price />
             </Route>
             <Route path={`/${coinId}/chart`}>
-              <Chart />
+              <Chart coinId={coinId} />
             </Route>
           </Switch>
         </>
