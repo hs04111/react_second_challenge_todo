@@ -1,10 +1,7 @@
 import React, { useState } from 'react';
-import styled, { createGlobalStyle, ThemeProvider } from 'styled-components';
-import Router from './Router';
-import { ReactQueryDevtools } from 'react-query/devtools';
-import { darkTheme, lightTheme } from './theme';
-import { useRecoilValue } from 'recoil';
-import { isDarkAtom } from './atom';
+import styled, { createGlobalStyle } from 'styled-components';
+import { darkTheme } from './theme';
+import ToDoList from './ToDoList';
 
 const GlobalStyle = createGlobalStyle`
 
@@ -69,15 +66,10 @@ a {
 `;
 
 function App() {
-  const isDark = useRecoilValue(isDarkAtom);
-
   return (
     <>
-      <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
-        <GlobalStyle />
-        <Router />
-        <ReactQueryDevtools initialIsOpen={false} />
-      </ThemeProvider>
+      <GlobalStyle />
+      <ToDoList />
     </>
   );
 }
