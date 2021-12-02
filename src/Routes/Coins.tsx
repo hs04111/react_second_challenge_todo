@@ -2,8 +2,10 @@ import { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { useQuery } from 'react-query';
 import { Link } from 'react-router-dom';
+import { useSetRecoilState } from 'recoil';
 import styled from 'styled-components';
 import { fetchCoins } from '../api';
+import { isDarkAtom } from '../atom';
 
 const Container = styled.div`
   padding: 0px 20px;
@@ -70,16 +72,8 @@ interface coinInterface {
 
 function Coins() {
   const { isLoading, data } = useQuery<coinInterface[]>('allCoins', fetchCoins);
-  // const [coins, setCoins] = useState<coinInterface[]>([]);
-  // const [loading, setLoading] = useState(true);
-  // useEffect(() => {
-  //   (async () => {
-  //     const response = await fetch('https://api.coinpaprika.com/v1/coins');
-  //     const json = await response.json();
-  //     setCoins(json.slice(0, 100));
-  //     setLoading(false);
-  //   })();
-  // }, []);
+  const setIsDarkAtom = useSetRecoilState(isDarkAtom);
+  const toggleDark = () => setIsDarkAtom((current) => !current);
 
   return (
     <Container>
@@ -88,6 +82,7 @@ function Coins() {
       </Helmet>
       <Header>
         <Title>Coins</Title>
+        <button onClick={toggleDark}>Toggle mode</button>
       </Header>
       {isLoading ? (
         <Loader>Loading...</Loader>
