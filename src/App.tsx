@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
-import { darkTheme } from './theme';
 import ToDoList from './Components/ToDoList';
 
 const GlobalStyle = createGlobalStyle`
