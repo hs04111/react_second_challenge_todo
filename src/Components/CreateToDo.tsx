@@ -1,16 +1,22 @@
 import { useForm } from 'react-hook-form';
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
-import { json } from 'stream/consumers';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { categoryState, toDosState } from '../atoms';
+import { CustomForm } from './createCategory';
 
 interface IForm {
   toDo: string;
 }
 
 function CreateToDo() {
-  const { register, handleSubmit, setValue } = useForm<IForm>();
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors },
+  } = useForm<IForm>();
   const setToDos = useSetRecoilState(toDosState);
   const category = useRecoilValue(categoryState);
+
   const handleValid = ({ toDo }: IForm) => {
     setValue('toDo', '');
     setToDos((oldToDos) => [
@@ -18,15 +24,17 @@ function CreateToDo() {
       ...oldToDos,
     ]);
   };
+
   return (
-    <form onSubmit={handleSubmit(handleValid)}>
+    <CustomForm onSubmit={handleSubmit(handleValid)}>
       <input
-        {...register('toDo', { required: 'Please write a to do' })}
-        placeholder="Write a ToDo"
+        {...register('toDo', { required: 'To do 입력은 필수입니다.' })}
+        placeholder="오늘의 To do는?"
         type="text"
       />
-      <button>Submit</button>;
-    </form>
+      <button>등록</button>
+      <span>{errors.toDo?.message}</span>
+    </CustomForm>
   );
 }
 

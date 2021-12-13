@@ -1,6 +1,7 @@
 import { atom, selector } from 'recoil';
 
 const TODO_KEY = 'toDos';
+const CATEGORIES_KEY = 'additional_categories';
 
 export enum Categories {
   'TO_DO' = 'TO_DO',
@@ -13,6 +14,11 @@ export interface IToDo {
   id: number;
   category: Categories;
 }
+
+export const customCategoriesState = atom<string[]>({
+  key: 'customCategories',
+  default: JSON.parse(localStorage.getItem(CATEGORIES_KEY) || '[]'),
+});
 
 export const categoryState = atom<Categories>({
   key: 'category',
