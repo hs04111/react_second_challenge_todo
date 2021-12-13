@@ -37,6 +37,11 @@ const Container = styled.div`
     width: 100%;
     margin-top: 30px;
   }
+  footer {
+    position: fixed;
+    bottom: 10px;
+    right: 3%;
+  }
 `;
 
 const Title = styled.h1`
@@ -95,6 +100,7 @@ function ToDoList() {
           <ToDo key={toDo.id} {...toDo} />
         ))}
       </ul>
+      <footer>Blueschist, NomadCoders</footer>
     </Container>
   );
 }

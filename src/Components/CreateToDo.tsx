@@ -28,7 +28,9 @@ function CreateToDo() {
   return (
     <CustomForm onSubmit={handleSubmit(handleValid)}>
       <input
-        {...register('toDo', { required: 'To do 입력은 필수입니다.' })}
+        {...register('toDo', {
+          required: 'To do를 입력 후 등록을 클릭하세요.',
+        })}
         placeholder="오늘의 To do는?"
         type="text"
       />

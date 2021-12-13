@@ -66,7 +66,7 @@ function CreateCategory() {
     <CustomForm onSubmit={handleSubmit(handleValid)}>
       <input
         {...register('customCategory', {
-          required: '카테고리 입력은 필수입니다.',
+          required: '카테고리를 입력 후 생성을 클릭하세요.',
         })}
         placeholder="여기에 새 카테고리를 쓰세요"
         type="text"

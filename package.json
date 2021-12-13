@@ -11,6 +11,7 @@
     "@types/react": "^17.0.37",
     "@types/react-dom": "^17.0.11",
     "apexcharts": "^3.31.0",
+    "gh-pages": "^3.2.3",
     "react": "^17.0.2",
     "react-apexcharts": "^1.3.9",
     "react-dom": "^17.0.2",
@@ -28,7 +29,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "deploy": "gh-pages -d build ",
+    "predeploy": "npm run build"
   },
   "eslintConfig": {
     "extends": [
@@ -58,5 +61,6 @@
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-react": "^7.27.1",
     "prettier": "^2.5.0"
-  }
+  },
+  "homepage": "https://hs04111.github.io/react_second_challenge_todo"
 }
