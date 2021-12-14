@@ -68,7 +68,7 @@ function CreateCategory() {
         {...register('customCategory', {
           required: '카테고리를 입력 후 생성을 클릭하세요.',
         })}
-        placeholder="여기에 새 카테고리를 쓰세요"
+        placeholder="여기에 새 카테고리를 입력하세요"
         type="text"
       />
       <button>생성</button>

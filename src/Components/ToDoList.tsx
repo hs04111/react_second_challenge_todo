@@ -13,6 +13,7 @@ import CreateToDo from './CreateToDo';
 import ToDo from './ToDo';
 
 const TODO_KEY = 'toDos';
+const CATEGORIES_KEY = 'additional_categories';
 
 const Container = styled.div`
   max-width: 500px;
@@ -35,7 +36,8 @@ const Container = styled.div`
   }
   ul {
     width: 100%;
-    margin: 30px 0;
+    margin-top: 30px;
+    margin-bottom: 15px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -69,19 +71,40 @@ const Subtitle = styled.h2`
   margin-top: 50px;
 `;
 
+const DeleteAllBtn = styled.button`
+  margin-top: 15px;
+  margin-bottom: 40px;
+  background: transparent;
+  color: ${(props) => props.theme.textColor};
+  font-size: 20px;
+  border: 3px solid ${(props) => props.theme.textColor};
+  border-radius: 5px;
+`;
+
 function ToDoList() {
-  const rawToDos = useRecoilValue(toDosState);
+  const [rawToDos, setRawToDos] = useRecoilState(toDosState);
   const toDos = useRecoilValue(toDoSelector);
   const [category, setCategory] = useRecoilState(categoryState);
-  const customCategories = useRecoilValue(customCategoriesState);
+  const [customCategories, setCustomCategories] = useRecoilState(
+    customCategoriesState,
+  );
 
   const onInput = (event: React.FormEvent<HTMLSelectElement>) => {
     setCategory(event.currentTarget.value as any);
   };
 
+  const onDeleteAllClick = (event: React.FormEvent<HTMLButtonElement>) => {
+    setRawToDos([]);
+    setCustomCategories([]);
+  };
+
   useEffect(() => {
     localStorage.setItem(TODO_KEY, JSON.stringify(rawToDos));
   }, [rawToDos]);
+
+  useEffect(() => {
+    localStorage.setItem(CATEGORIES_KEY, JSON.stringify(customCategories));
+  }, [customCategories]);
 
   return (
     <Container>
@@ -107,6 +130,9 @@ function ToDoList() {
           <ToDo key={toDo.id} {...toDo} />
         ))}
       </ul>
+      <DeleteAllBtn onClick={onDeleteAllClick}>
+        💥모두 지우고 초기화💥
+      </DeleteAllBtn>
       <footer>Blueschist, NomadCoders</footer>
     </Container>
   );
