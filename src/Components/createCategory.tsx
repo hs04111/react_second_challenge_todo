@@ -21,7 +21,7 @@ export const CustomForm = styled.form`
     width: 60%;
     background: transparent;
     color: ${(props) => props.theme.textColor};
-    font-size: 20px;
+    font-size: 16px;
     border: none;
     text-align: center;
   }

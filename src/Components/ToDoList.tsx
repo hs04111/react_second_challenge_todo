@@ -35,17 +35,21 @@ const Container = styled.div`
   }
   ul {
     width: 100%;
-    margin-top: 30px;
+    margin: 30px 0;
   }
   footer {
+    width: 100%;
+    text-align: center;
     position: fixed;
-    bottom: 10px;
-    right: 3%;
+    bottom: 0px;
+    padding: 5px 0px;
+    background-color: ${(props) => props.theme.bgColor};
+    border-top: 0.5px solid ${(props) => props.theme.textColor};
   }
 `;
 
 const Title = styled.h1`
-  width: 100%;
+  width: 95%;
   font-size: 40px;
   font-weight: bold;
   text-align: center;
@@ -79,7 +83,7 @@ function ToDoList() {
   return (
     <Container>
       <Title>오늘의 To Do</Title>
-      <Subtitle>카테고리를 아래에서 선택하세요</Subtitle>
+      <Subtitle>카테고리를 선택하세요</Subtitle>
       <select value={category} onInput={onInput}>
         <option value={Categories.TO_DO}>To Do</option>
         <option value={Categories.DOING}>Doing</option>

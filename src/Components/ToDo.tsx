@@ -46,8 +46,8 @@ const DeleteBtn = styled.button`
   margin-top: 25px;
   background: transparent;
   color: ${(props) => props.theme.textColor};
-  font-size: 20px;
-  border: 3px solid ${(props) => props.theme.textColor};
+  font-size: 16px;
+  border: 2px solid ${(props) => props.theme.textColor};
   border-radius: 5px;
 `;
 
@@ -117,7 +117,7 @@ function ToDo({ text, category, id }: IToDo) {
         </div>
       </CategoriesBtn>
       <DeleteBtn onClick={onDeleteClick} id={`${id}`}>
-        To do 지우기
+        To do 지우기 🗑
       </DeleteBtn>
     </ToDoLi>
   );
