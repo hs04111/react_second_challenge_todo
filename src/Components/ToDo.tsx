@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { Categories, customCategoriesState, IToDo, toDosState } from '../atoms';
 
 const ToDoLi = styled.li`
+  width: 95%;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
