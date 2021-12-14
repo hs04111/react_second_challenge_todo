@@ -8,7 +8,7 @@ const ToDoLi = styled.li`
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
-  margin-bottom: 8px;
+  margin-bottom: 30px;
   border: 2px solid ${(props) => props.theme.textColor};
   border-radius: 5px;
   padding: 10px;
